@@ -18,9 +18,9 @@ import lombok.Data;
 public class PostThumb implements Serializable {
 
     /**
-     * id
+     * id(ASSIGN_ID--雪花算法)
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
