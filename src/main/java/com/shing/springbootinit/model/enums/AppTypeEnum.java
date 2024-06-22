@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public enum AppTypeEnum {
 
-    Score("得分类", 0),
+    SCORE("得分类", 0),
 
     TEST("测评类", 1);
 

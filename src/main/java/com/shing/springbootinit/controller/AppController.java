@@ -2,10 +2,7 @@ package com.shing.springbootinit.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shing.springbootinit.annotation.AuthCheck;
-import com.shing.springbootinit.common.BaseResponse;
-import com.shing.springbootinit.common.DeleteRequest;
-import com.shing.springbootinit.common.ErrorCode;
-import com.shing.springbootinit.common.ResultUtils;
+import com.shing.springbootinit.common.*;
 import com.shing.springbootinit.constant.UserConstant;
 import com.shing.springbootinit.exception.BusinessException;
 import com.shing.springbootinit.exception.ThrowUtils;
@@ -170,6 +167,8 @@ public class AppController {
         long size = appQueryRequest.getPageSize();
         // 限制爬虫
         ThrowUtils.throwIf(size > 20, ErrorCode.PARAMS_ERROR);
+        //只能看到过审
+        appQueryRequest.setReviewStatus(ReviewStatusEnum.PASS.getValue());
         // 查询数据库
         Page<App> appPage = appService.page(new Page<>(current, size),
                 appService.getQueryWrapper(appQueryRequest));
@@ -236,5 +235,47 @@ public class AppController {
         return ResultUtils.success(true);
     }
 
+    /**
+     * region - endregion (idea语法，区域内折叠)
+     */
     // endregion
+
+    /**
+     * 应用审核
+     *
+     * @return
+     */
+    @PostMapping("/review")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
+    public BaseResponse<Boolean> doReview(@RequestBody
+                                          ReviewRequest reviewRequest, HttpServletRequest request) {
+        ThrowUtils.throwIf(reviewRequest == null || reviewRequest.getId() <= 0, ErrorCode.PARAMS_ERROR);
+        Long id = reviewRequest.getId();
+        Integer reviewStatus = reviewRequest.getReviewStatus();
+
+        // 校验
+        ReviewStatusEnum reviewStatusEnum = ReviewStatusEnum.getEnumByValue(reviewStatus);
+        if (id == null || reviewStatusEnum == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
+        //判断是否存在
+        App oldApp = appService.getById(id);
+        ThrowUtils.throwIf(oldApp == null, ErrorCode.NOT_FOUND_ERROR);
+        // 已是该状态
+        if (oldApp.getReviewStatus().equals(reviewStatus)) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请勿重复审核");
+        }
+
+        // 更新审核状态
+        User loginUser = userService.getLoginUser(request);
+        App app = new App();
+        app.setId(id);
+        app.setReviewStatus(reviewStatus);
+        app.setReviewerId(loginUser.getId());
+        boolean result = appService.updateById(app);
+        ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
+        return ResultUtils.success(true);
+
+    }
 }

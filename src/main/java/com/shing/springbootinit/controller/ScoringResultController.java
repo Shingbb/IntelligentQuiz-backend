@@ -57,6 +57,7 @@ public class ScoringResultController {
         //  在此处将实体类和 DTO 进行转换
         ScoringResult scoringResult = new ScoringResult();
         BeanUtils.copyProperties(scoringResultAddRequest, scoringResult);
+
         List<String> resultProp = scoringResultAddRequest.getResultProp();
         scoringResult.setResultProp(JSONUtil.toJsonStr(resultProp));
         // 数据校验
@@ -222,8 +223,10 @@ public class ScoringResultController {
         //  在此处将实体类和 DTO 进行转换
         ScoringResult scoringResult = new ScoringResult();
         BeanUtils.copyProperties(scoringResultEditRequest, scoringResult);
+
         List<String> resultProp = scoringResultEditRequest.getResultProp();
         scoringResult.setResultProp(JSONUtil.toJsonStr(resultProp));
+
         // 数据校验
         scoringResultService.validScoringResult(scoringResult, false);
         User loginUser = userService.getLoginUser(request);

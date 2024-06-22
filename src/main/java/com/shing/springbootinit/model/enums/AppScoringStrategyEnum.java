@@ -1,6 +1,7 @@
 package com.shing.springbootinit.model.enums;
 
 import cn.hutool.core.util.ObjectUtil;
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,11 +12,12 @@ import java.util.stream.Collectors;
  *
  * @author shing
  */
+@Getter
 public enum AppScoringStrategyEnum {
 
     CUSTOM("自定义", 0),
 
-    ai("AI", 1);
+    AI("AI", 1);
 
 
     private final String text;
@@ -54,11 +56,4 @@ public enum AppScoringStrategyEnum {
         return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public String getText() {
-        return text;
-    }
 }
