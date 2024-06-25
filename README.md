@@ -8,8 +8,8 @@
 > 作者：[Shing](https://github.com/Shingbb)
 
 <div align="center">
-    <a href=""><img src="https://img.shields.io/badge/github-项目地址-yellow.svg?style=plasticr"></a>
-    <a href=""><img src="https://img.shields.io/badge/gitee-项目地址-red.svg?style=plasticr"></a>
+    <a href="https://github.com/Shingbb/IntelligentQuiz-backend"><img src="https://img.shields.io/badge/github-项目地址-yellow.svg?style=plasticr"></a>
+    <a href="https://gitee.com/MyShing/intelligent-quiz-backend#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><img src="https://img.shields.io/badge/gitee-项目地址-red.svg?style=plasticr"></a>
 </div>
 
 ___
