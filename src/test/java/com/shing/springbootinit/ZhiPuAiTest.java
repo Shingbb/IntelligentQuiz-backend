@@ -24,7 +24,7 @@ import java.util.List;
         // 通过指定MainApplication类作为应用程序的入口点来启动Spring Boot应用上下文
         classes = {MainApplication.class,},
         // 设置web环境为MOCK，表示测试中不启动实际的Web服务器，而是使用Spring Boot的MockWebServer
-        webEnvironment = SpringBootTest.WebEnvironment.MOCK,
+//        webEnvironment = SpringBootTest.WebEnvironment.MOCK,
         // 指定配置文件路径，允许我们在测试环境中使用不同的配置，例如数据库连接、服务端口等
         properties = {"spring.config.location=classpath:application-local.yml"}
 )
@@ -80,6 +80,37 @@ public class ZhiPuAiTest {
         // 添加一条用户请求消息。
         ChatMessage chatMessage = new ChatMessage(ChatMessageRole.USER.value(), "作为一名项目经理专家，请为iq博士这个ai开放平台创作一个吸引人的slogan");
         messages.add(chatMessage);
+
+        // 构造API请求对象，包含模型类型、消息内容、请求ID等信息。
+        ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
+                .model(Constants.ModelChatGLM4)
+                .stream(Boolean.FALSE)
+                .invokeMethod(Constants.invokeMethod)
+                .messages(messages)
+                .build();
+
+        // 调用AI模型API，发送请求并获取响应。
+        // 调用
+        ModelApiResponse invokeModelApiResp = clientV4.invokeModelApi(chatCompletionRequest);
+        // 打印模型的响应消息。
+        System.out.println("model output:" + invokeModelApiResp.getMsg());
+
+    }
+
+    @Test
+    public void testAiPrompt() {
+
+        // 构造用户请求的消息列表。
+        List<ChatMessage> messages = new ArrayList<>();
+        // 添加系统消息
+        ChatMessage systemChatMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), "\"你是一位严谨的出题专家，我会给你如下信息： ``` 应用名称， 【【【应用描述】】】， 应用类别， 要生成的题目数， 每个题目的选项数 ```  请你根据上述信息，按照以下步骤来出题： 1. 要求：题目和选项尽可能地短，题目不要包含序号，每题的选项数以我提供的为主，题目不能重复 2. 严格按照下面的 json 格式输出题目和选项 ``` [{\"options\":[{\"value\":\"选项内容\",\"key\":\"A\"},{\"value\":\"\",\"key\":\"B\"}],\"title\":\"题目标题\"}] ``` title 是题目，options 是选项，每个选项的 key 按照英文字母序（比如 A、B、C、D）以此类推，value 是选项内容 3. 检查题目是否包含序号，若包含序号则去除序号 4. 返回的题目列表格式必须为 JSON 数组，一定是json形式\"");
+        // 添加用户消息
+        ChatMessage userChatMessage = new ChatMessage(ChatMessageRole.USER.value(), "【【【小学三年级的数学题】】】，\n" +
+                "得分类，\n" +
+                "10，\n" +
+                "3");
+        messages.add(systemChatMessage);
+        messages.add(userChatMessage);
 
         // 构造API请求对象，包含模型类型、消息内容、请求ID等信息。
         ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
