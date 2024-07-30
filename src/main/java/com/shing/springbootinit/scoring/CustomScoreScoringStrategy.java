@@ -21,7 +21,7 @@ import java.util.Optional;
  * @author shing
  */
 @ScoringStrategyConfig(appType = 0, scoringStrategy = 0)
-public class CustomScoringStrategy implements ScoringStrategy {
+public class CustomScoreScoringStrategy implements ScoringStrategy {
 
     @Resource
     private QuestionService questionService;
@@ -64,7 +64,6 @@ public class CustomScoringStrategy implements ScoringStrategy {
 
         // 3. 遍历得分结果，找到第一个用户分数大于得分范围的结果，作为最终结果
         ScoringResult maxScoringResult = scoringResultList.get(0);
-        // 返回最大得分结果
         for (ScoringResult scoringResult : scoringResultList) {
             if (totalScore >= scoringResult.getResultScoreRange()) {
                 maxScoringResult = scoringResult;

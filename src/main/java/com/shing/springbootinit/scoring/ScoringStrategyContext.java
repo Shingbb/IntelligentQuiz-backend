@@ -24,7 +24,7 @@ public class ScoringStrategyContext {
      * 自定义分数计算策略
      */
     @Resource
-    private CustomScoringStrategy customScoreScoringStrategy;
+    private CustomScoreScoringStrategy customScoreScoringStrategy;
 
     /**
      * 自定义测试分数计算策略

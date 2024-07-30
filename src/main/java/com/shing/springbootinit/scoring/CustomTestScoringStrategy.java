@@ -34,14 +34,10 @@ public class CustomTestScoringStrategy implements ScoringStrategy {
     @Override
     public UserAnswer doScore(List<String> choices, App app) throws Exception {
         Long appId = app.getId();
-
         // 1. 根据 id 查询到题目和题目结果信息
-        // 根据appId查询特定应用下的一个问题
         Question question = questionService.getOne(
-                Wrappers.lambdaQuery(Question.class).eq(Question::getAppId, app.getId())
+                Wrappers.lambdaQuery(Question.class).eq(Question::getAppId, appId)
         );
-
-        // 根据appId查询所有相关评分结果
         List<ScoringResult> scoringResultList = scoringResultService.list(
                 Wrappers.lambdaQuery(ScoringResult.class)
                         .eq(ScoringResult::getAppId, appId)
@@ -76,6 +72,7 @@ public class CustomTestScoringStrategy implements ScoringStrategy {
                 }
             }
         }
+
         // 3. 遍历每种评分结果，计算哪个结果的得分更高
         // 初始化最高分数和最高分数对应的评分结果
         int maxScore = 0;
@@ -107,6 +104,5 @@ public class CustomTestScoringStrategy implements ScoringStrategy {
         userAnswer.setResultDesc(maxScoringResult.getResultDesc());
         userAnswer.setResultPicture(maxScoringResult.getResultPicture());
         return userAnswer;
-
     }
 }

@@ -1,5 +1,6 @@
 package com.shing.springbootinit.controller;
 
+import cn.hutool.json.JSONException;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shing.springbootinit.annotation.AuthCheck;
@@ -278,6 +279,14 @@ public class QuestionController {
             "4. 返回的题目列表格式必须为 JSON 数组，\n" +
             "一定是json形式";
 
+    /**
+     * 生成题目用户消息
+     *
+     * @param app            应用信息对象，包含应用的名称、描述和类型等。
+     * @param questionNumber 需要生成的题目数量。
+     * @param optionNumber   每道题目对应的选项数量。
+     * @return 返回构造好的用户消息字符串。
+     */
     private String getGenerateQuestionUserMessage(App app, int questionNumber, int optionNumber) {
         StringBuilder userMessage = new StringBuilder();
         userMessage.append(app.getAppName()).append("\n");
@@ -288,26 +297,44 @@ public class QuestionController {
         return userMessage.toString();
     }
 
+    /**
+     * 接收AI生成题目的请求，并返回生成的题目列表。
+     * 该方法首先校验请求参数，然后根据参数获取对应的应用信息。接着，构造用户消息字符串，并通过调用AI管理器来生成题目。
+     * 最后，解析AI返回的结果，将题目数据封装成列表返回。
+     *
+     * @param aiGenerateQuestionRequest 包含应用ID、题目数量和选项数量的请求对象。
+     * @return 返回包含生成的题目内容的列表。
+     */
     @PostMapping("/ai_generate")
     public BaseResponse<List<QuestionContentDTO>> aiGenerateQuestion(@RequestBody AiGenerateQuestionRequest aiGenerateQuestionRequest) {
+        // 校验请求参数是否为空
         ThrowUtils.throwIf(aiGenerateQuestionRequest == null, ErrorCode.PARAMS_ERROR);
+        // 获取请求中的应用ID、题目数量和选项数量
         // 获取参数
         Long appId = aiGenerateQuestionRequest.getAppId();
         int questionNumber = aiGenerateQuestionRequest.getQuestionNumber();
         int optionNumber = aiGenerateQuestionRequest.getOptionNumber();
+        // 根据应用ID获取应用信息
         App app = appService.getById(appId);
+        // 校验应用信息是否存在
         ThrowUtils.throwIf(app == null, ErrorCode.NOT_FOUND_ERROR);
+        // 封装用户消息，用于请求AI生成题目
         // 封装 Prompt
         String userMessage = getGenerateQuestionUserMessage(app, questionNumber, optionNumber);
-        // AI 生成
-        String result = aiManager.doSyncUnstableRequest(GENERATE_QUESTION_SYSTEM_MESSAGE, userMessage);
+        log.info(userMessage);
+        // 调用AI管理器，发送用户消息请求生成题目
+        // AI 生成--默认
+        String result = aiManager.doSyncRequest(GENERATE_QUESTION_SYSTEM_MESSAGE, userMessage,null);
+        // 解析AI返回的结果，提取题目数据
         // 结果处理
         int start = result.indexOf("[");
         int end = result.lastIndexOf("]");
         String json = result.substring(start, end + 1);
         List<QuestionContentDTO> questionContentDTOList = JSONUtil.toList(json, QuestionContentDTO.class);
+        // 返回生成的题目列表
         return ResultUtils.success(questionContentDTOList);
     }
+
 
     // endregion
 
