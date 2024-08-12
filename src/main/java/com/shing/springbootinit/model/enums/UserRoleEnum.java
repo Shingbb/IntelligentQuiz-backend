@@ -3,6 +3,8 @@ package com.shing.springbootinit.model.enums;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lombok.Getter;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
@@ -10,6 +12,7 @@ import org.apache.commons.lang3.ObjectUtils;
  *
 
  */
+@Getter
 public enum UserRoleEnum {
 
     USER("用户", "user"),
@@ -27,8 +30,6 @@ public enum UserRoleEnum {
 
     /**
      * 获取值列表
-     *
-     * @return
      */
     public static List<String> getValues() {
         return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
@@ -36,9 +37,6 @@ public enum UserRoleEnum {
 
     /**
      * 根据 value 获取枚举
-     *
-     * @param value
-     * @return
      */
     public static UserRoleEnum getEnumByValue(String value) {
         if (ObjectUtils.isEmpty(value)) {
@@ -52,11 +50,4 @@ public enum UserRoleEnum {
         return null;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public String getText() {
-        return text;
-    }
 }

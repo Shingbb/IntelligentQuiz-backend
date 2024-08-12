@@ -1,6 +1,7 @@
 package com.shing.springbootinit.model.enums;
 
 import cn.hutool.core.util.ObjectUtil;
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
  *
  * @author shing
  */
+@Getter
 public enum AppTypeEnum {
 
     SCORE("得分类", 0),
@@ -29,9 +31,6 @@ public enum AppTypeEnum {
 
     /**
      * 根据 value 获取枚举
-     *
-     * @param value
-     * @return
      */
     public static AppTypeEnum getEnumByValue(Integer value) {
         if (ObjectUtil.isEmpty(value)) {
@@ -47,18 +46,9 @@ public enum AppTypeEnum {
 
     /**
      * 获取值列表
-     *
-     * @return
      */
     public static List<Integer> getValues() {
         return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public String getText() {
-        return text;
-    }
 }

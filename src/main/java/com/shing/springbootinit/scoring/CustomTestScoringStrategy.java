@@ -1,7 +1,6 @@
 package com.shing.springbootinit.scoring;
 
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.shing.springbootinit.model.dto.question.QuestionContentDTO;
 import com.shing.springbootinit.model.entity.App;

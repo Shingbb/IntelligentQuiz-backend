@@ -4,11 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.Getter;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * 文件上传业务类型枚举
  */
+@Getter
 public enum FileUploadBizEnum {
 
     USER_AVATAR("用户头像", "user_avatar"),
@@ -26,8 +28,6 @@ public enum FileUploadBizEnum {
 
     /**
      * 获取值列表
-     *
-     * @return
      */
     public static List<String> getValues() {
         return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
@@ -35,9 +35,6 @@ public enum FileUploadBizEnum {
 
     /**
      * 根据 value 获取枚举
-     *
-     * @param value
-     * @return
      */
     public static FileUploadBizEnum getEnumByValue(String value) {
         if (ObjectUtils.isEmpty(value)) {
@@ -51,11 +48,4 @@ public enum FileUploadBizEnum {
         return null;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public String getText() {
-        return text;
-    }
 }

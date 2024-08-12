@@ -11,10 +11,7 @@ import com.shing.springbootinit.mapper.QuestionMapper;
 import com.shing.springbootinit.model.dto.question.QuestionQueryRequest;
 import com.shing.springbootinit.model.entity.App;
 import com.shing.springbootinit.model.entity.Question;
-
-import com.shing.springbootinit.model.entity.User;
 import com.shing.springbootinit.model.vo.QuestionVO;
-import com.shing.springbootinit.model.vo.UserVO;
 import com.shing.springbootinit.service.AppService;
 import com.shing.springbootinit.service.QuestionService;
 import com.shing.springbootinit.service.UserService;
@@ -26,10 +23,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -115,9 +109,8 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
      */
     @Override
     public QuestionVO getQuestionVO(Question question, HttpServletRequest request) {
-        QuestionVO questionVO = QuestionVO.objToVo(question);
         // 可选操作：补充题目VO对象的相关信息
-        return questionVO;
+        return QuestionVO.objToVo(question);
     }
 
     /**
@@ -135,7 +128,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
             return questionVOPage;
         }
         // 题目实体列表转换为VO对象列表
-        List<QuestionVO> questionVOList = questionList.stream().map(question -> QuestionVO.objToVo(question)).collect(Collectors.toList());
+        List<QuestionVO> questionVOList = questionList.stream().map(QuestionVO::objToVo).collect(Collectors.toList());
         // 可选操作：补充题目VO对象的相关信息
 
         questionVOPage.setRecords(questionVOList);

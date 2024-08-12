@@ -11,9 +11,7 @@ import com.shing.springbootinit.mapper.ScoringResultMapper;
 import com.shing.springbootinit.model.dto.scoringResult.ScoringResultQueryRequest;
 import com.shing.springbootinit.model.entity.App;
 import com.shing.springbootinit.model.entity.ScoringResult;
-import com.shing.springbootinit.model.entity.User;
 import com.shing.springbootinit.model.vo.ScoringResultVO;
-import com.shing.springbootinit.model.vo.UserVO;
 import com.shing.springbootinit.service.AppService;
 import com.shing.springbootinit.service.ScoringResultService;
 import com.shing.springbootinit.service.UserService;
@@ -26,8 +24,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -150,9 +146,7 @@ public class ScoringResultServiceImpl extends ServiceImpl<ScoringResultMapper, S
             return scoringResultVOPage;
         }
         // 实体列表转VO列表
-        List<ScoringResultVO> scoringResultVOList = scoringResultList.stream().map(scoringResult -> {
-            return ScoringResultVO.objToVo(scoringResult);
-        }).collect(Collectors.toList());
+        List<ScoringResultVO> scoringResultVOList = scoringResultList.stream().map(ScoringResultVO::objToVo).collect(Collectors.toList());
 
         // 可选操作：为VO列表补充额外信息
 

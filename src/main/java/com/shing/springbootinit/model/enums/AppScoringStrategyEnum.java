@@ -31,9 +31,6 @@ public enum AppScoringStrategyEnum {
 
     /**
      * 根据 value 获取枚举
-     *
-     * @param value
-     * @return
      */
     public static AppScoringStrategyEnum getEnumByValue(Integer value) {
         if (ObjectUtil.isEmpty(value)) {
@@ -49,8 +46,6 @@ public enum AppScoringStrategyEnum {
 
     /**
      * 获取值列表
-     *
-     * @return
      */
     public static List<Integer> getValues() {
         return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
