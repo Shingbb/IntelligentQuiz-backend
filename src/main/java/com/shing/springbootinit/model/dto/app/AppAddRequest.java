@@ -3,7 +3,6 @@ package com.shing.springbootinit.model.dto.app;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 创建应用请求
