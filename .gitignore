@@ -145,4 +145,6 @@ fabric.properties
 
 !/src/main/resources/application-local.yml
 /src/main/resources/application-local.yml
-/src/main/java/com/shing/springbootinit/constant/KeyConstant.java
+/src/main/java/com/shing/intelligentquiz/constant/KeyConstant.java
+!/src/main/resources/application-local.yml
+/src/main/resources/application-local.yml

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shing.springbootinit.mapper.UserAnswerMapper">
+<mapper namespace="com.shing.intelligentquiz.mapper.UserAnswerMapper">
 
-    <resultMap id="BaseResultMap" type="com.shing.springbootinit.model.entity.UserAnswer">
+    <resultMap id="BaseResultMap" type="com.shing.intelligentquiz.model.entity.UserAnswer">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="appId" column="appId" jdbcType="BIGINT"/>
             <result property="appType" column="appType" jdbcType="TINYINT"/>

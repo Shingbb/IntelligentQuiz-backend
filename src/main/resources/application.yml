@@ -72,4 +72,4 @@ knife4j:
       default:
         api-rule: package
         api-rule-resources:
-          - com.shing.springbootinit.controller
+          - com.shing.intelligentquiz.controller
