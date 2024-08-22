@@ -1,20 +1,16 @@
-package com.shing.intelligentquiz.model.dto.scoringResult;
+package com.shing.intelligentquiz.model.dto.scoringresult;
 
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * 编辑评分结果请求
+ * 创建评分结果请求
  */
 @Data
-public class ScoringResultEditRequest implements Serializable {
-
-    /**
-     * id
-     */
-    private Long id;
+public class ScoringResultAddRequest implements Serializable {
 
     /**
      * 结果名称，如物流师
@@ -41,5 +37,11 @@ public class ScoringResultEditRequest implements Serializable {
      */
     private Integer resultScoreRange;
 
+    /**
+     * 应用 id
+     */
+    private Long appId;
+
+    @Serial
     private static final long serialVersionUID = 1L;
 }

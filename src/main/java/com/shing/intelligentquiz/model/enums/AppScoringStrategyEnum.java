@@ -48,7 +48,7 @@ public enum AppScoringStrategyEnum {
      * 获取值列表
      */
     public static List<Integer> getValues() {
-        return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
+        return Arrays.stream(values()).map(item -> item.value).toList();
     }
 
 }

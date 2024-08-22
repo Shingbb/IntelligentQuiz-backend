@@ -2,6 +2,7 @@ package com.shing.intelligentquiz.model.dto.question;
 
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,5 +23,6 @@ public class QuestionUpdateRequest implements Serializable {
      */
     private List<QuestionContentDTO> questionContent;
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }

@@ -1,9 +1,10 @@
-package com.shing.intelligentquiz.model.dto.userAnswer;
+package com.shing.intelligentquiz.model.dto.useranswer;
 
 import com.shing.intelligentquiz.common.PageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -78,5 +79,6 @@ public class UserAnswerQueryRequest extends PageRequest implements Serializable 
      */
     private String searchText;
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }

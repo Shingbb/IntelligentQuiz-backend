@@ -75,8 +75,8 @@ public class ScoringResultVO implements Serializable {
     /**
      * 封装类转对象
      *
-     * @param scoringResultVO
-     * @return
+     * @param scoringResultVO    封装类
+     * @return ScoringResult
      */
     public static ScoringResult voToObj(ScoringResultVO scoringResultVO) {
         if (scoringResultVO == null) {
@@ -91,8 +91,8 @@ public class ScoringResultVO implements Serializable {
     /**
      * 对象转封装类
      *
-     * @param scoringResult
-     * @return
+     * @param scoringResult      对象
+     * @return  ScoringResultVO
      */
     public static ScoringResultVO objToVo(ScoringResult scoringResult) {
         if (scoringResult == null) {

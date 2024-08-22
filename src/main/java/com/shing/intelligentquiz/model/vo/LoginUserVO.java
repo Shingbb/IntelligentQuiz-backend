@@ -1,5 +1,6 @@
 package com.shing.intelligentquiz.model.vo;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -47,5 +48,6 @@ public class LoginUserVO implements Serializable {
      */
     private Date updateTime;
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }

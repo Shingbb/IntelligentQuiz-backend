@@ -8,13 +8,12 @@ import com.shing.intelligentquiz.common.ErrorCode;
 import com.shing.intelligentquiz.constant.CommonConstant;
 import com.shing.intelligentquiz.exception.ThrowUtils;
 import com.shing.intelligentquiz.mapper.ScoringResultMapper;
-import com.shing.intelligentquiz.model.dto.scoringResult.ScoringResultQueryRequest;
+import com.shing.intelligentquiz.model.dto.scoringresult.ScoringResultQueryRequest;
 import com.shing.intelligentquiz.model.entity.App;
 import com.shing.intelligentquiz.model.entity.ScoringResult;
 import com.shing.intelligentquiz.model.vo.ScoringResultVO;
 import com.shing.intelligentquiz.service.AppService;
 import com.shing.intelligentquiz.service.ScoringResultService;
-import com.shing.intelligentquiz.service.UserService;
 import com.shing.intelligentquiz.utils.SqlUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
@@ -32,9 +31,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class ScoringResultServiceImpl extends ServiceImpl<ScoringResultMapper, ScoringResult> implements ScoringResultService {
-
-    @Resource
-    private UserService userService;
 
     @Resource
     private AppService appService;

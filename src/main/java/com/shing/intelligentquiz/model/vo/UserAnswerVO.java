@@ -90,8 +90,8 @@ public class UserAnswerVO implements Serializable {
     /**
      * 封装类转对象
      *
-     * @param userAnswerVO
-     * @return
+     * @param userAnswerVO  用户答案视图对象
+     * @return            用户答案对象
      */
     public static UserAnswer voToObj(UserAnswerVO userAnswerVO) {
         if (userAnswerVO == null) {
@@ -106,8 +106,8 @@ public class UserAnswerVO implements Serializable {
     /**
      * 对象转封装类
      *
-     * @param userAnswer
-     * @return
+     * @param userAnswer  用户答案对象
+     * @return           用户答案视图对象
      */
     public static UserAnswerVO objToVo(UserAnswer userAnswer) {
         if (userAnswer == null) {

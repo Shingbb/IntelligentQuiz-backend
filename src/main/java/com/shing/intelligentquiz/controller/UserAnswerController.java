@@ -10,10 +10,10 @@ import com.shing.intelligentquiz.common.ResultUtils;
 import com.shing.intelligentquiz.constant.UserConstant;
 import com.shing.intelligentquiz.exception.BusinessException;
 import com.shing.intelligentquiz.exception.ThrowUtils;
-import com.shing.intelligentquiz.model.dto.userAnswer.UserAnswerAddRequest;
-import com.shing.intelligentquiz.model.dto.userAnswer.UserAnswerEditRequest;
-import com.shing.intelligentquiz.model.dto.userAnswer.UserAnswerQueryRequest;
-import com.shing.intelligentquiz.model.dto.userAnswer.UserAnswerUpdateRequest;
+import com.shing.intelligentquiz.model.dto.useranswer.UserAnswerAddRequest;
+import com.shing.intelligentquiz.model.dto.useranswer.UserAnswerEditRequest;
+import com.shing.intelligentquiz.model.dto.useranswer.UserAnswerQueryRequest;
+import com.shing.intelligentquiz.model.dto.useranswer.UserAnswerUpdateRequest;
 import com.shing.intelligentquiz.model.entity.App;
 import com.shing.intelligentquiz.model.entity.UserAnswer;
 import com.shing.intelligentquiz.model.entity.User;
@@ -56,8 +56,8 @@ public class UserAnswerController {
     /**
      * 创建用户答案
      *
-     * @param userAnswerAddRequest
-     * @param request
+     * @param userAnswerAddRequest 用户答案
+     * @param request             请求
      * @return
      */
     @PostMapping("/add")
@@ -103,9 +103,9 @@ public class UserAnswerController {
     /**
      * 删除用户答案
      *
-     * @param deleteRequest
-     * @param request
-     * @return
+     * @param deleteRequest  删除请求
+     * @param request 请求
+     * @return  删除结果
      */
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteUserAnswer(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
@@ -130,8 +130,8 @@ public class UserAnswerController {
     /**
      * 更新用户答案（仅管理员可用）
      *
-     * @param userAnswerUpdateRequest
-     * @return
+     * @param userAnswerUpdateRequest  用户答案
+     * @return  更新结果
      */
     @PostMapping("/update")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
@@ -161,8 +161,8 @@ public class UserAnswerController {
     /**
      * 根据 id 获取用户答案（封装类）
      *
-     * @param id
-     * @return
+     * @param id 用户答案 id
+     * @return 用户答案（封装类）
      */
     @GetMapping("/get/vo")
     public BaseResponse<UserAnswerVO> getUserAnswerVOById(long id, HttpServletRequest request) {
@@ -177,8 +177,8 @@ public class UserAnswerController {
     /**
      * 分页获取用户答案列表（仅管理员可用）
      *
-     * @param userAnswerQueryRequest
-     * @return
+     * @param userAnswerQueryRequest 用户答案
+     * @return 用户答案列表
      */
     @PostMapping("/list/page")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
@@ -194,9 +194,9 @@ public class UserAnswerController {
     /**
      * 分页获取用户答案列表（封装类）
      *
-     * @param userAnswerQueryRequest
-     * @param request
-     * @return
+     * @param userAnswerQueryRequest 用户答案查询请求
+     * @param request 请求
+     * @return 用户答案列表（封装类）
      */
     @PostMapping("/list/page/vo")
     public BaseResponse<Page<UserAnswerVO>> listUserAnswerVOByPage(@RequestBody UserAnswerQueryRequest userAnswerQueryRequest,
@@ -215,8 +215,8 @@ public class UserAnswerController {
     /**
      * 分页获取当前登录用户创建的用户答案列表
      *
-     * @param userAnswerQueryRequest
-     * @param request
+     * @param userAnswerQueryRequest 用户答案查询请求
+     * @param request 请求
      * @return
      */
     @PostMapping("/my/list/page/vo")
@@ -240,9 +240,9 @@ public class UserAnswerController {
     /**
      * 编辑用户答案（给用户使用）
      *
-     * @param userAnswerEditRequest
-     * @param request
-     * @return
+     * @param userAnswerEditRequest 用户答案编辑请求
+     * @param request 请求
+     * @return 编辑结果
      */
     @PostMapping("/edit")
     public BaseResponse<Boolean> editUserAnswer(@RequestBody UserAnswerEditRequest userAnswerEditRequest, HttpServletRequest request) {

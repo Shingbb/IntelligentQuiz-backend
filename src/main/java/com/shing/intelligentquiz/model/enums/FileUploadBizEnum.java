@@ -1,11 +1,10 @@
 package com.shing.intelligentquiz.model.enums;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import lombok.Getter;
 import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 文件上传业务类型枚举
@@ -30,7 +29,7 @@ public enum FileUploadBizEnum {
      * 获取值列表
      */
     public static List<String> getValues() {
-        return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
+        return Arrays.stream(values()).map(item -> item.value).toList();
     }
 
     /**

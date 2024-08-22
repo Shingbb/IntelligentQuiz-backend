@@ -10,10 +10,10 @@ import com.shing.intelligentquiz.common.ResultUtils;
 import com.shing.intelligentquiz.constant.UserConstant;
 import com.shing.intelligentquiz.exception.BusinessException;
 import com.shing.intelligentquiz.exception.ThrowUtils;
-import com.shing.intelligentquiz.model.dto.scoringResult.ScoringResultAddRequest;
-import com.shing.intelligentquiz.model.dto.scoringResult.ScoringResultEditRequest;
-import com.shing.intelligentquiz.model.dto.scoringResult.ScoringResultQueryRequest;
-import com.shing.intelligentquiz.model.dto.scoringResult.ScoringResultUpdateRequest;
+import com.shing.intelligentquiz.model.dto.scoringresult.ScoringResultAddRequest;
+import com.shing.intelligentquiz.model.dto.scoringresult.ScoringResultEditRequest;
+import com.shing.intelligentquiz.model.dto.scoringresult.ScoringResultQueryRequest;
+import com.shing.intelligentquiz.model.dto.scoringresult.ScoringResultUpdateRequest;
 import com.shing.intelligentquiz.model.entity.ScoringResult;
 import com.shing.intelligentquiz.model.entity.User;
 import com.shing.intelligentquiz.model.vo.ScoringResultVO;
@@ -45,10 +45,6 @@ public class ScoringResultController {
 
     /**
      * 创建评分结果
-     *
-     * @param scoringResultAddRequest
-     * @param request
-     * @return
      */
     @PostMapping("/add")
     public BaseResponse<Long> addScoringResult(@RequestBody ScoringResultAddRequest scoringResultAddRequest, HttpServletRequest request) {
@@ -102,8 +98,8 @@ public class ScoringResultController {
     /**
      * 更新评分结果（仅管理员可用）
      *
-     * @param scoringResultUpdateRequest
-     * @return
+     * @param scoringResultUpdateRequest 评分结果更新请求
+     * @return 更新后的评分结果
      */
     @PostMapping("/update")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
@@ -131,8 +127,8 @@ public class ScoringResultController {
     /**
      * 根据 id 获取评分结果（封装类）
      *
-     * @param id
-     * @return
+     * @param id 评分结果 id
+     * @return 评分结果封装类
      */
     @GetMapping("/get/vo")
     public BaseResponse<ScoringResultVO> getScoringResultVOById(long id, HttpServletRequest request) {
@@ -147,8 +143,8 @@ public class ScoringResultController {
     /**
      * 分页获取评分结果列表（仅管理员可用）
      *
-     * @param scoringResultQueryRequest
-     * @return
+     * @param scoringResultQueryRequest 评分结果查询请求
+     * @return 分页的评分结果列表
      */
     @PostMapping("/list/page")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
@@ -164,9 +160,9 @@ public class ScoringResultController {
     /**
      * 分页获取评分结果列表（封装类）
      *
-     * @param scoringResultQueryRequest
-     * @param request
-     * @return
+     * @param scoringResultQueryRequest 评分结果查询请求
+     * @param request 请求
+     * @return 分页的评分结果列表封装类
      */
     @PostMapping("/list/page/vo")
     public BaseResponse<Page<ScoringResultVO>> listScoringResultVOByPage(@RequestBody ScoringResultQueryRequest scoringResultQueryRequest,
@@ -185,9 +181,9 @@ public class ScoringResultController {
     /**
      * 分页获取当前登录用户创建的评分结果列表
      *
-     * @param scoringResultQueryRequest
-     * @param request
-     * @return
+     * @param scoringResultQueryRequest 评分结果查询请求
+     * @param request 请求
+     * @return 分页的评分结果列表封装类
      */
     @PostMapping("/my/list/page/vo")
     public BaseResponse<Page<ScoringResultVO>> listMyScoringResultVOByPage(@RequestBody ScoringResultQueryRequest scoringResultQueryRequest,
@@ -210,9 +206,9 @@ public class ScoringResultController {
     /**
      * 编辑评分结果（给用户使用）
      *
-     * @param scoringResultEditRequest
-     * @param request
-     * @return
+     * @param scoringResultEditRequest 评分结果编辑请求
+     * @param request 请求
+     * @return 编辑是否成功
      */
     @PostMapping("/edit")
     public BaseResponse<Boolean> editScoringResult(@RequestBody ScoringResultEditRequest scoringResultEditRequest, HttpServletRequest request) {

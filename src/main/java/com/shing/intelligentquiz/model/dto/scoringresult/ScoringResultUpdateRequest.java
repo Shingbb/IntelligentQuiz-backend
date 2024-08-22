@@ -1,7 +1,8 @@
-package com.shing.intelligentquiz.model.dto.scoringResult;
+package com.shing.intelligentquiz.model.dto.scoringresult;
 
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -41,5 +42,6 @@ public class ScoringResultUpdateRequest implements Serializable {
      */
     private Integer resultScoreRange;
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }

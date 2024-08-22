@@ -4,6 +4,7 @@ import com.shing.intelligentquiz.common.PageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -38,5 +39,6 @@ public class QuestionQueryRequest extends PageRequest implements Serializable {
      */
     private Long notId;
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }

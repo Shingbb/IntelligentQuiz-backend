@@ -1,7 +1,8 @@
-package com.shing.intelligentquiz.model.dto.userAnswer;
+package com.shing.intelligentquiz.model.dto.useranswer;
 
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,5 +22,6 @@ public class UserAnswerAddRequest implements Serializable {
      */
     private List<String> choices;
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }

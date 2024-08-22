@@ -1,5 +1,6 @@
 package com.shing.intelligentquiz.model.dto.user;
 
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -35,5 +36,6 @@ public class UserUpdateRequest implements Serializable {
      */
     private String userRole;
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }

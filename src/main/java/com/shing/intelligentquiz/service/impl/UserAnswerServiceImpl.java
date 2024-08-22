@@ -8,7 +8,7 @@ import com.shing.intelligentquiz.common.ErrorCode;
 import com.shing.intelligentquiz.constant.CommonConstant;
 import com.shing.intelligentquiz.exception.ThrowUtils;
 import com.shing.intelligentquiz.mapper.UserAnswerMapper;
-import com.shing.intelligentquiz.model.dto.userAnswer.UserAnswerQueryRequest;
+import com.shing.intelligentquiz.model.dto.useranswer.UserAnswerQueryRequest;
 import com.shing.intelligentquiz.model.entity.App;
 import com.shing.intelligentquiz.model.entity.UserAnswer;
 import com.shing.intelligentquiz.model.entity.User;
@@ -44,8 +44,8 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
     /**
      * 校验数据
      *
-     * @param userAnswer
-     * @param add        对创建的数据进行校验
+     * @param userAnswer 用户答案对象
+     * @param add 对创建的数据进行校验
      */
     @Override
     public void validUserAnswer(UserAnswer userAnswer, boolean add) {
@@ -69,8 +69,8 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
     /**
      * 获取查询条件
      *
-     * @param userAnswerQueryRequest
-     * @return
+     * @param userAnswerQueryRequest 用户答案查询请求
+     * @return 查询条件
      */
     @Override
     public QueryWrapper<UserAnswer> getQueryWrapper(UserAnswerQueryRequest userAnswerQueryRequest) {
@@ -125,9 +125,9 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
     /**
      * 获取用户答案封装
      *
-     * @param userAnswer
-     * @param request
-     * @return
+     * @param userAnswer 用户答案对象
+     * @param request 请求对象
+     * @return 用户答案封装
      */
     @Override
     public UserAnswerVO getUserAnswerVO(UserAnswer userAnswer, HttpServletRequest request) {
@@ -153,9 +153,9 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
     /**
      * 分页获取用户答案封装
      *
-     * @param userAnswerPage
-     * @param request
-     * @return
+     * @param userAnswerPage 用户答案分页对象
+     * @param request 请求对象
+     * @return 分页用户答案封装
      */
     @Override
     public Page<UserAnswerVO> getUserAnswerVOPage(Page<UserAnswer> userAnswerPage, HttpServletRequest request) {
@@ -165,9 +165,7 @@ public class UserAnswerServiceImpl extends ServiceImpl<UserAnswerMapper, UserAns
             return userAnswerVOPage;
         }
         // 对象列表 => 封装对象列表
-        List<UserAnswerVO> userAnswerVOList = userAnswerList.stream().map(userAnswer -> {
-            return UserAnswerVO.objToVo(userAnswer);
-        }).collect(Collectors.toList());
+        List<UserAnswerVO> userAnswerVOList = userAnswerList.stream().map(UserAnswerVO::objToVo).collect(Collectors.toList());
 
         //  可以根据需要为封装对象补充值，不需要的内容可以删除
         // region 可选

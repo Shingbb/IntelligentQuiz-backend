@@ -1,15 +1,23 @@
-package com.shing.intelligentquiz.model.dto.scoringResult;
+package com.shing.intelligentquiz.model.dto.scoringresult;
 
+import com.shing.intelligentquiz.common.PageRequest;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 /**
- * 创建评分结果请求
+ * 查询评分结果请求
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class ScoringResultAddRequest implements Serializable {
+public class ScoringResultQueryRequest extends PageRequest implements Serializable {
+
+    /**
+     * id
+     */
+    private Long id;
 
     /**
      * 结果名称，如物流师
@@ -29,7 +37,7 @@ public class ScoringResultAddRequest implements Serializable {
     /**
      * 结果属性集合 JSON，如 [I,S,T,J]
      */
-    private List<String> resultProp;
+    private String resultProp;
 
     /**
      * 结果得分范围，如 80，表示 80及以上的分数命中此结果
@@ -41,5 +49,21 @@ public class ScoringResultAddRequest implements Serializable {
      */
     private Long appId;
 
+    /**
+     * 创建用户 id
+     */
+    private Long userId;
+
+    /**
+     * id
+     */
+    private Long notId;
+
+    /**
+     * 搜索词
+     */
+    private String searchText;
+
+    @Serial
     private static final long serialVersionUID = 1L;
 }

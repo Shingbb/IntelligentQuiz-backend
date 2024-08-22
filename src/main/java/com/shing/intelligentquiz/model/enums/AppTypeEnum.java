@@ -5,7 +5,6 @@ import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * App 应用类型状态枚举
@@ -48,7 +47,7 @@ public enum AppTypeEnum {
      * 获取值列表
      */
     public static List<Integer> getValues() {
-        return Arrays.stream(values()).map(item -> item.value).collect(Collectors.toList());
+        return Arrays.stream(values()).map(item -> item.value).toList();
     }
 
 }
