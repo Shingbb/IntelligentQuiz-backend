@@ -1,5 +1,6 @@
 package com.shing.intelligentquiz.controller;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shing.intelligentquiz.annotation.AuthCheck;
@@ -25,6 +26,7 @@ import com.shing.intelligentquiz.service.UserAnswerService;
 import com.shing.intelligentquiz.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -57,7 +59,7 @@ public class UserAnswerController {
      * 创建用户答案
      *
      * @param userAnswerAddRequest 用户答案
-     * @param request             请求
+     * @param request              请求
      * @return
      */
     @PostMapping("/add")
@@ -84,8 +86,12 @@ public class UserAnswerController {
         User loginUser = userService.getLoginUser(request);
         userAnswer.setUserId(loginUser.getId());
         // 写入数据库
-        boolean result = userAnswerService.save(userAnswer);
-        ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
+        try {
+            boolean result = userAnswerService.save(userAnswer);
+            ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
+        }catch (DuplicateKeyException e){
+           // ignore error
+        }
         // 返回新写入的数据 id
         long newUserAnswerId = userAnswer.getId();
         // 调用评分模块直接出结果
@@ -104,9 +110,9 @@ public class UserAnswerController {
     /**
      * 删除用户答案
      *
-     * @param deleteRequest  删除请求
-     * @param request 请求
-     * @return  删除结果
+     * @param deleteRequest 删除请求
+     * @param request       请求
+     * @return 删除结果
      */
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteUserAnswer(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
@@ -131,8 +137,8 @@ public class UserAnswerController {
     /**
      * 更新用户答案（仅管理员可用）
      *
-     * @param userAnswerUpdateRequest  用户答案
-     * @return  更新结果
+     * @param userAnswerUpdateRequest 用户答案
+     * @return 更新结果
      */
     @PostMapping("/update")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
@@ -196,7 +202,7 @@ public class UserAnswerController {
      * 分页获取用户答案列表（封装类）
      *
      * @param userAnswerQueryRequest 用户答案查询请求
-     * @param request 请求
+     * @param request                请求
      * @return 用户答案列表（封装类）
      */
     @PostMapping("/list/page/vo")
@@ -217,7 +223,7 @@ public class UserAnswerController {
      * 分页获取当前登录用户创建的用户答案列表
      *
      * @param userAnswerQueryRequest 用户答案查询请求
-     * @param request 请求
+     * @param request                请求
      * @return
      */
     @PostMapping("/my/list/page/vo")
@@ -242,7 +248,7 @@ public class UserAnswerController {
      * 编辑用户答案（给用户使用）
      *
      * @param userAnswerEditRequest 用户答案编辑请求
-     * @param request 请求
+     * @param request               请求
      * @return 编辑结果
      */
     @PostMapping("/edit")
@@ -275,4 +281,9 @@ public class UserAnswerController {
     }
 
     // endregion
+
+    @GetMapping("/generate/id")
+    public BaseResponse<Long> generateUserAnswerId() {
+        return ResultUtils.success(IdUtil.getSnowflakeNextId());
+    }
 }
